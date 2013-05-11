@@ -18,17 +18,29 @@ public class Login extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		processRequest(req,resp);
+		
+	}
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		processRequest(req,resp);
+	}
+
+	private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException{
 		userHome = req.getServletContext().getRealPath("/")+"/WEB-INF/user";
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
 		if(checkLogin(username,password)){
+			req.getSession().setAttribute("login", username);
 			req.getRequestDispatcher("member.view").forward(req, resp);
 		}
 		else{
 			resp.sendRedirect("index.html");
 		}
 	}
-
 	private boolean checkLogin(String username, String password) throws IOException {
 		// TODO Auto-generated method stub
 		if(username!=null && password!=null){
