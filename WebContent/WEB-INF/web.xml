@@ -6,6 +6,6 @@
    
     <context-param> <!-- for log4j -->
         <param-name>USERS</param-name>
-        <param-value>C:\Users\lenovo\Documents\GitHub\weibo-like\WebContent</param-value>
+        <param-value>E:\apache-tomcat-7.0.39\webapps\weibo-like\WEB-INF\users</param-value>
     </context-param>
 </web-app>

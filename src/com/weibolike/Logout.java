@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 @WebServlet("/logout.do")
 public class Logout extends HttpServlet{
-	private final String LOGIN_VIEW = "index.html";
+	private final String LOGIN_VIEW = "index.jsp";
 	protected void doGet(HttpServletRequest request,HttpServletResponse response) 
 		                      throws ServletException, IOException {
 	        if(request.getSession().getAttribute("login") != null) {

@@ -11,8 +11,10 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 public class UserService {
@@ -38,12 +40,14 @@ public class UserService {
 	//验证登陆
 	public boolean checkLogin(String username, String password) throws IOException {
 		// TODO Auto-generated method stub
+		
 		if(username!=null && password!=null){
 			for(String file : new File(USERS).list()){
 				if(file!=null && file.equals(username)){
 					try {
 						BufferedReader reader = new BufferedReader(new FileReader(new File(USERS +"/" +username + "/profile")));
 						String[] spit = reader.readLine().split("\t");
+						reader.close();
 						return spit[1].equals(password);
 					} catch (FileNotFoundException e) {
 						// TODO Auto-generated catch block
@@ -56,7 +60,7 @@ public class UserService {
 		return false;
 	}
 	//读取用户的信息
-	public Map<Date,String> readMessage(String username) throws IOException{
+	public List<Blah> getBlahs(String username) throws IOException{
 		File users = new File(USERS + "/" + username);
 		Map<Date,String> messages = new TreeMap<Date,String>(new DateComparetor());
 		for(String fileName : users.list(new TextFilter())){
@@ -70,7 +74,15 @@ public class UserService {
 			messages.put(date, message.toString());
 			reader.close();
 		}
-		return messages;
+		  List<Blah> blahs = new ArrayList<Blah>();
+	        
+		 for (Date date : messages.keySet()) {
+		           String txt = messages.get(date);
+		           blahs.add(new Blah(username, date, txt));
+		  }
+	        
+	      return blahs;
+		
 	}
 	private class TextFilter implements FilenameFilter{
 
@@ -91,10 +103,10 @@ public class UserService {
 
 	}
 	//发布用户的消息
-	public void addMessage(String username, String blabla) throws IOException {
-		String file = USERS + "/" + username + "/" + new Date().getTime() + ".txt";
+	public void addBlah(Blah blah) throws IOException {
+		String file = USERS + "/" + blah.getUsername() + "/" + new Date().getTime() + ".txt";
 		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
-		writer.write(blabla);
+		writer.write(blah.getTxt());
 		writer.close();
 	}
 	//验证用户是否为有效用户
@@ -110,5 +122,13 @@ public class UserService {
 		}
 		return false;
 		
+	}
+	public boolean deleteBlah(Blah blah){
+		File delete = new File(USERS + "/" + blah.getUsername() + "/" + blah.getDate().getTime() + ".txt");
+    	if(delete.exists()){
+    		delete.delete();
+    		return true;
+    	}
+    	return false;
 	}
 }

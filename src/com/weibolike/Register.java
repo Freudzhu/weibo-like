@@ -12,8 +12,8 @@ import com.weibolike.model.UserService;
 @WebServlet("/register.do")
 public class Register extends HttpServlet{
 
-	private String SUCESS_VIEW = "success.view";
-	private String ERROR_VIEW = "error.view";
+	private String SUCESS_VIEW = "index.jsp";
+	private String ERROR_VIEW = "register.jsp";
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {

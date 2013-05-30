@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebFilter(
-	urlPatterns = {"/delete.do","/logout.do","/message.do","/member.view"},
+	urlPatterns = {"/delete.do","/logout.do","/message.do","/member.jsp"},
 	initParams = {@WebInitParam(name = "LOGIN_VIEW",value="index.html")}
 )
 public class MemberFilter implements Filter {
