@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-
-   
-    <context-param> <!-- for log4j -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <context-param> 
         <param-name>USERS</param-name>
-        <param-value>E:\apache-tomcat-7.0.39\webapps\weibo-like\WEB-INF\users</param-value>
+        <param-value>E:\apache-tomcat-7.0.8\webapps\weibo-like\WEB-INF\users</param-value>
     </context-param>
+  <jsp-config>
+    <jsp-property-group>
+      <url-pattern>*.jsp</url-pattern>
+      <page-encoding>UTF-8</page-encoding>
+      <default-content-type>text/html</default-content-type>
+    </jsp-property-group>
+  </jsp-config>
 </web-app>

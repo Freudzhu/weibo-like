@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebFilter(
 	urlPatterns = {"/delete.do","/logout.do","/message.do","/member.jsp"},
-	initParams = {@WebInitParam(name = "LOGIN_VIEW",value="index.html")}
+	initParams = {@WebInitParam(name = "LOGIN_VIEW",value="index.jsp")}
 )
 public class MemberFilter implements Filter {
 	private String LOGIN_VIEW;

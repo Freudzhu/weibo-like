@@ -1,9 +1,7 @@
 <%@page pageEncoding="UTF-8"
    import="java.util.*, java.text.*,com.weibolike.model.*"%>
-   <% 
-   		UserService userService = (UserService) request.getServletContext().getAttribute("USER_SERVICE");	
-		String username = (String) request.getSession().getAttribute("login");
-   %>
+   <%@taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+   <%@taglib  uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN'>
 <html>
 <head>
@@ -19,18 +17,10 @@
 	</div>
 	<form method='post' action='message.do'>
 	分享新鲜事...<br>
-		<%
-		String blabla = (String) request.getAttribute("blabla");
-		if(blabla == null){
-			blabla = "";
-		}
-		else{
-		%>
-		信息要在140个字以内
-		<% 
-		}
-		%>
-	<textarea cols='60' rows='4' name='blabla'><%= blabla%></textarea><br>
+		<c:if test="${requestScope.blabla!=null}}">
+			信息要在140个字以内
+		</c:if>
+	<textarea cols='60' rows='4' name='blabla'>${requestScope.blabla}</textarea><br>
 	<br>
 	<button type='submit'>送出</button>
 	</form>
@@ -39,23 +29,17 @@
 		<tr><th><hr></th></tr>
 		</thead>
 		<tbody>
-		<%
-			List<Blah> blahs=(List<Blah>)request.getAttribute("blahs");
-		    DateFormat dateFomat = DateFormat.getDateTimeInstance(DateFormat.FULL,DateFormat.FULL,Locale.CHINA);
-		    for(Blah blah : blahs){
-		 %>
-		    	<tr>
+		<c:forEach var="blah" items="${requestScope.blahs}">
+		    <tr>
 			    	<td style='vertical-align:top;'>
-			    	<%=blah.getUsername()%><br>
-			    	<%=blah.getTxt()%> <br>
-			    	<%=dateFomat.format(blah.getDate())%>
-			    	<a href='delete.do?message=<%=blah.getDate().getTime()%>'>删除</a>
+			    	${blah.username}<br>
+			    	<c:out value="${blah.txt}"/><br>
+			    	<fmt:formatDate value="${blah.date}" type="both" dateStyle="full" timeStyle="full"/>
+			    	<a href='delete.do?message=${blah.date.time}'>删除</a>
 			    	<hr>
 			    	</td>
 		    	</tr>
-		<%
-		    }
-		%>
+		</c:forEach>
 		</tbody>
 	</table>
 	<hr style='width: 100%; height: 1px;'>

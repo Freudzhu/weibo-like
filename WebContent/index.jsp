@@ -19,7 +19,7 @@
                </ul>
         </div>
         <div>
-            <a href='register.html'>还不是会员？</a><p>
+            <a href='register.jsp'>还不是会员？</a><p>
             <div style='color: rgb(255, 0, 0);'>${ requestScope.error }</div>
             <form method='post' action='login.do'>
                 <table bgcolor='#cccccc'>
