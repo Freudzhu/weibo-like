@@ -33,7 +33,9 @@ public class Message extends HttpServlet{
     		}
     		
     	}
-    	List<Blah> blahs = userService.getBlahs(username);
+    	Blah blah=new Blah();
+    	blah.setUsername(username);
+    	List<Blah> blahs = userService.getBlahs(blah);
         request.setAttribute("blahs", blahs);
         request.getRequestDispatcher(MEMBERVIEW).forward(request, response);
 
@@ -57,7 +59,9 @@ public class Message extends HttpServlet{
  		}
  		
  	}
- 	List<Blah> blahs = userService.getBlahs(username);
+	 Blah blah=new Blah();
+	 blah.setUsername(username);
+	 List<Blah> blahs = userService.getBlahs(blah);
      request.setAttribute("blahs", blahs);
      request.getRequestDispatcher(MEMBERVIEW).forward(request, response);
 

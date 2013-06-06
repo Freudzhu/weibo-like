@@ -6,6 +6,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.weibolike.model.Account;
 import com.weibolike.model.UserService;
 @WebServlet(
 	    urlPatterns={"/login.do"},
@@ -40,8 +42,11 @@ public class Login extends HttpServlet{
 		UserService userService = (UserService) req.getServletContext().getAttribute("USER_SERVICE");
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
+		Account t = new Account();
+		t.setName(username);
+		t.setPassword(password);
 		String page;
-		if(userService.checkLogin(username,password)){
+		if(userService.checkLogin(t)){
 			req.getSession().setAttribute("login", username);
 			page = SUCCESS_VIEW;
 		}

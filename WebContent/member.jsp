@@ -38,7 +38,7 @@
 			    	<a href='delete.do?message=${blah.date.time}'>删除</a>
 			    	<hr>
 			    	</td>
-		    	</tr>
+		    </tr>
 		</c:forEach>
 		</tbody>
 	</table>

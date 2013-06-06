@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.weibolike.model.Account;
 import com.weibolike.model.UserService;
 @WebServlet("/register.do")
 public class Register extends HttpServlet{
@@ -46,7 +47,11 @@ public class Register extends HttpServlet{
 		if(isInValidEmail(email)){
 			errors.add("电子邮件的格式错误");
 		}
-		if(userService.isInValidUser(username)){
+		Account t = new Account();
+		t.setName(username);
+		t.setEmail(email);
+		t.setPassword(password);
+		if(userService.isUserExisted(t)){
 			errors.add("用户名为空或者用户名已经存在");
 		}
 		if(isInvalidPassword(password,confirmedPasswd)){
@@ -58,7 +63,7 @@ public class Register extends HttpServlet{
 			req.setAttribute("errors", errors);
 		}else{
 			result_page = SUCESS_VIEW;
-			userService.creatUser(username,email,password);
+			userService.addAccount(t);
 		}
 		req.getRequestDispatcher(result_page).forward(req, resp);
 	}
